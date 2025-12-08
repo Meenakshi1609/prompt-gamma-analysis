@@ -1,0 +1,28 @@
+
+
+
+
+
+# Macro file for example B1
+/run/numberOfThreads 4
+/run/initialize
+
+# Create box mesh that matches your WATER PHANTOM
+/score/create/boxMesh boxMesh_1
+
+# Mesh size: half dimensions (4.25cm x 4.25cm x 27.5cm)
+# Your water phantom: 8.5cm x 8.5cm x 55cm
+/score/mesh/boxSize 4.25 4.25 27.5 cm
+
+# Number of bins: X, Y, Z (1x1x600 for your slices)
+/score/mesh/nBin 1 1 600
+
+# Score Population (number of particles passing through)
+/score/quantity/population popScorer
+
+/score/close
+
+/gun/particle pi+
+/gun/energy 100 MeV
+/run/beamOn 100000
+/score/dumpQuantityToFile boxMesh_1 popScorer proton-100MeV.txt
