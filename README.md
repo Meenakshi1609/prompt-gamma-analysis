@@ -4,9 +4,9 @@ The work explores the spatial correlation between prompt gamma emission profiles
 Prompt gamma radiation arises from the inelastic nuclear interactions between incident proton and target nuclei in the medium. 
 
 Simulation Details:
-Primary particles used are protons
-Target is the water phantom having dimension 8.5*8.5*55 cm<sup>3</sup> 
-Cylindrical detectors are placed along the z axis surrounding the water phantom
+Primary particles used are protons. 
+Target is the water phantom having dimension 8.5*8.5*55 cm<sup>3</sup>. 
+Cylindrical detectors are placed along the z axis surrounding the water phantom. 
 Original gamma emission position, detector hit position and energy are detected
 
 Analysis workflow:
