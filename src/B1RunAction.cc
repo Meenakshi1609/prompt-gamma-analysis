@@ -60,9 +60,10 @@ B1RunAction::B1RunAction()
   analysisManager->CreateNtupleDColumn("PosY");       // Column 2: Position Y (double)
   analysisManager->CreateNtupleDColumn("PosZ");       // Column 3: Position Z (double)
   analysisManager->CreateNtupleDColumn("KineticEnergy"); // Column 4: Kinetic Energy (double)
+  analysisManager->CreateNtupleSColumn("volume");
   analysisManager->FinishNtuple();
   // add new units for dose
-  // 
+
 //  const G4double milligray = 1.e-3*gray;
 //  const G4double microgray = 1.e-6*gray;
 //  const G4double nanogray  = 1.e-9*gray;

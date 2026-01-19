@@ -33,14 +33,41 @@
 #include "G4UserSteppingAction.hh"
 #include "globals.hh"
 #include <fstream>
+#include "G4ThreeVector.hh"
+#include <vector>
+#include <string>
 
+// Forward declaration
 class B1EventAction;
-
 class G4LogicalVolume;
 
-/// Stepping action class
-/// 
+// Struct for detailed tracking of one photon per event
+struct DetectorHit {
+    G4ThreeVector position;
+    G4double energy;
+    G4double depositedEnergy;
+    std::string detectorName;
+    G4double time;
+};
 
+// CSV hit data structure for ALL photons
+struct CSVHitData {
+    G4int eventID;
+    G4int trackID;
+    G4String detector;
+    G4double posX;
+    G4double posY;
+    G4double posZ;
+    G4double energy;
+    G4double depositedEnergy;
+    // True origin tracking
+    G4double trueOriginX;
+    G4double trueOriginY;
+    G4double trueOriginZ;
+    G4double initialEnergy;
+};
+
+/// Stepping action class
 class B1SteppingAction : public G4UserSteppingAction
 {
   public:
@@ -48,12 +75,29 @@ class B1SteppingAction : public G4UserSteppingAction
     virtual ~B1SteppingAction();
 
     // method from the base class
-    virtual void UserSteppingAction(const G4Step*);
+    virtual void UserSteppingAction(const G4Step* step);
 
   private:
+    // Private helper methods for CSV
+    void WriteCSVHeader();              
+    void WriteCSVData();  
+
+  private:
+    // Member variables
     B1EventAction*  fEventAction;
     G4LogicalVolume* fScoringVolume;
-    std::ofstream outputFile;
+    
+    // Photon tracking (one photon per event)
+    G4int fTrackedPhotonID;
+    G4ThreeVector fTrackedPhotonGeneratedPos;
+    G4double fTrackedPhotonGeneratedEnergy;
+    G4int fCurrentEventID;
+    std::vector<DetectorHit> fDetectorHits;
+    
+    // CSV file handling for ALL photons
+    std::ofstream csvFile;
+    std::vector<CSVHitData> fCSVHits;
+    G4bool fCSVHeaderWritten;
 };
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

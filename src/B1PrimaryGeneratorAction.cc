@@ -53,7 +53,7 @@ B1PrimaryGeneratorAction::B1PrimaryGeneratorAction(float enrgy)
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
   G4String particleName;
   G4ParticleDefinition* particle
-    = particleTable->FindParticle(particleName="pi+");
+    = particleTable->FindParticle(particleName="proton");
   fParticleGun->SetParticleDefinition(particle);
   fParticleGun->SetParticleMomentumDirection(G4ThreeVector(0.,0.,1.));
   fParticleGun->SetParticleEnergy(enrgy*MeV);
@@ -70,6 +70,7 @@ B1PrimaryGeneratorAction::~B1PrimaryGeneratorAction()
 
 void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
+  
   //this function is called at the begining of ecah event
   //
 
@@ -103,7 +104,7 @@ void B1PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 //  G4double size = 0.8;
   G4double x0 = (G4UniformRand()-0.5)*5*cm;
   G4double y0 = (G4UniformRand()-0.5)*5*cm;
-  G4double z0 = -25*cm;
+  G4double z0 = -27.5*cm;
   
   fParticleGun->SetParticlePosition(G4ThreeVector(x0,y0,z0));
 

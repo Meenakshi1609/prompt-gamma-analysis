@@ -100,6 +100,26 @@ G4VPhysicalVolume* B1DetectorConstruction::Construct()
   new G4PVPlacement(0, G4ThreeVector(), logicDetector,
                     "CylDetector", logicWorld, false, 0, checkOverlaps);
                     
+           // ============================================
+  // DETECTOR 2: OUTER CYLINDRICAL DETECTOR
+  // (Surrounds Detector1 with a gap)
+  // ============================================
+  G4double gap_thickness = 0.5*cm;  // Gap between the two detectors
+  
+  // Outer detector starts where inner detector ends + gap
+  G4double det_innerRadius2 = det_outerRadius + gap_thickness;
+  G4double det_outerRadius2 = det_innerRadius2 + 0.05*cm;  // Same thickness as inner detector
+  
+  G4Tubs* solidDetector2 =
+    new G4Tubs("CylDetector2", det_innerRadius2, det_outerRadius2,
+               det_halfHeight, 0.*deg, 360.*deg);
+
+  G4LogicalVolume* logicDetector2 =
+    new G4LogicalVolume(solidDetector2, det_mat, "CylDetector2");
+
+  // Position Detector2 at same center (concentric)
+  new G4PVPlacement(0, G4ThreeVector(), logicDetector2,
+                    "CylDetector2", logicWorld, false, 0, checkOverlaps);         
   
 
   // WATER PHANTOM (Box) inside Cylinder
