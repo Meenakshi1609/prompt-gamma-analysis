@@ -12,3 +12,6 @@ Original gamma emission position, detector hit position and energy are detected
 Analysis workflow:
 When proton beam is incident on water, production of prompt gamma happens. The output is being stored in CSV files. 
 Then python analysis is performed to extract energy distribution and depth profile. 
+## Prompt Gamma Energy Distribution
+
+![Prompt gamma energy distribution](IMAGES/gamma_energy_spectrum_bin0.01MeV_old.png)
